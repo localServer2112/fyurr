@@ -13,6 +13,7 @@ import logging
 from logging import Formatter, FileHandler
 from flask_wtf import Form
 from forms import *
+import collections
 #----------------------------------------------------------------------------#
 # App Config.
 #----------------------------------------------------------------------------#
@@ -25,6 +26,7 @@ migrate = Migrate(app, db)
 db.init_app(app)
 # TODO: connect to a local postgresql database - DONE
 
+collections.Callable = collections.abc.Callable
 #----------------------------------------------------------------------------#
 # Models.
 #----------------------------------------------------------------------------#
