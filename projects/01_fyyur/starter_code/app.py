@@ -573,7 +573,6 @@ def shows():
   # displays list of shows at /shows
   # TODO: replace with real venues data.
   data =[]
-
   shows =  Show.query.all()
   for show in shows:
       artist = db.session.query(Artist.name, Artist.image_link).filter(Artist.id == show.artist_id).one()
@@ -598,26 +597,26 @@ def create_shows():
 def create_show_submission():
   # called to create new shows in the db, upon submitting new show listing form
   # TODO: insert form data as a new Show record in the db, instead
-  form = ShowForm(request.form)
-  if form.validate():
-    try:
-      venue_id = request.form.get('venue_id')
-      artist_id = request.form.get('artist_id')
-      start_time = request.form.get('start_time')
-      data = Show(venue_id=venue_id, artist_id=artist_id, start_time=start_time)
-      db.session.add(data)
-      db.session.commit()
-      # on successful db insert, flash success
-      flash('Show was successfully listed!')
-    except:
-      db.session.rollback()
-    # TODO: on unsuccessful db insert, flash an error instead.
-      flash('An error occurred. Show could not be listed.')
-    finally:
-      db.session.close()
-  else:
-    for field, message in form.errors.items():
-      flash(field + ' - ' + str(message), 'danger')
+  # form = ShowForm(request.form)
+  # if form.validate(): #validate form
+  # try:
+  #   venue_id = request.form.get('venue_id')
+  #   artist_id = request.form.get('artist_id')
+  #   start_time = request.form.get('start_time')
+  #   data = Show(venue_id=venue_id, artist_id=artist_id, start_time=start_time)
+  #   db.session.add(data)
+  #   db.session.commit()
+  #     # on successful db insert, flash success
+  #   flash('Show was successfully listed!')
+  # except:
+  #   db.session.rollback()
+  #   # TODO: on unsuccessful db insert, flash an error instead.
+  #   flash('An error occurred. Show could not be listed.')
+  # finally:
+  #   db.session.close()
+  # else:
+  #   for field, message in form.errors.items():
+  #     flash(field + ' - ' + str(message), 'danger')
   
   # e.g., flash('An error occurred. Show could not be listed.')
   # see: http://flask.pocoo.org/docs/1.0/patterns/flashing/
